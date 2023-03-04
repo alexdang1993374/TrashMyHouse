@@ -31,12 +31,12 @@ const AccountPage = () => {
     return <div>Loading...</div>;
   }
 
-  if (ready && !user) {
+  if (ready && !user && !redirect) {
     return <Navigate to={"/login"} />;
   }
 
   if (redirect) {
-    return <Navigate to={"/login"} />;
+    return <Navigate to={"/"} />;
   }
 
   return (
