@@ -1,6 +1,6 @@
-import MenuIcon from "../assets/MenuIcon";
-import UserIcon from "../assets/UserIcon";
-import { ContainerSt } from "../styles/common";
+import MenuIcon from "../../assets/MenuIcon";
+import UserIcon from "../../assets/UserIcon";
+import { ContainerSt } from "../../styles/common";
 
 const UserWidget = () => {
   return (

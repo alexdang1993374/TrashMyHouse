@@ -1,17 +1,14 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import HeaderTitle from "./components/HeaderTitle";
-import SearchWidget from "./components/SearchWidget";
-import UserWidget from "./components/UserWidget";
+import IndexPage from "./pages/IndexPage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
-    <header className="flex justify-between">
-      <HeaderTitle />
-
-      <SearchWidget />
-
-      <UserWidget />
-    </header>
+    <Routes>
+      <Route index element={<IndexPage />} />
+      <Route path="/login" element={<LoginPage />} />
+    </Routes>
   );
 }
 

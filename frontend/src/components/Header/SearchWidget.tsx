@@ -1,5 +1,5 @@
-import SearchIcon from "../assets/SearchIcon";
-import { ContainerSt, DividerSt } from "../styles/common";
+import SearchIcon from "../../assets/SearchIcon";
+import { ContainerSt, DividerSt } from "../../styles/common";
 
 const SearchWidget = () => {
   return (
