@@ -1,10 +1,6 @@
 import tw from "tailwind-styled-components";
 
-interface IContainerStProps {
-  $hideShadow?: boolean;
-}
-
-export const ContainerSt = tw.div<IContainerStProps>`
+export const ContainerSt = tw.div`
     flex 
     gap-2 
     border 
@@ -12,8 +8,8 @@ export const ContainerSt = tw.div<IContainerStProps>`
     rounded-full 
     py-2 
     px-4 
-    ${(p) => !p.$hideShadow && "shadow-md shadow-gray-300"}
-    
+    shadow-md 
+    shadow-gray-300
 `;
 
 export const DividerSt = tw.div`
