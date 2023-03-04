@@ -25,8 +25,6 @@ export const UserContext = createContext<IContextValue>({
   setUser: () => {},
 });
 
-export const useUserContext = () => useContext(UserContext);
-
 export const UserContextProvider = ({
   children,
 }: IUserContextProviderProps) => {
@@ -52,3 +50,5 @@ export const UserContextProvider = ({
     </UserContext.Provider>
   );
 };
+
+export const useUserContext = () => useContext(UserContext);
