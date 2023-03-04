@@ -43,8 +43,7 @@ app.get("/profile", (req: Request, res: Response) => {
       {},
       async (err: string, userData: IUserProfile) => {
         if (err) throw err;
-        const { name, email, _id } = await User.findById(userData._id);
-        res.json({ name, email, _id });
+        res.json(userData);
       }
     );
   } else {
@@ -74,7 +73,7 @@ app.post("/login", async (req: Request, res: Response) => {
     const passOk = bcrypt.compareSync(password, userDoc.password);
     if (passOk) {
       jwt.sign(
-        { email: userDoc.email, id: userDoc._id },
+        { email: userDoc.email, id: userDoc._id, name: userDoc.name },
         jwtSecret,
         {},
         (err: string, token: string) => {

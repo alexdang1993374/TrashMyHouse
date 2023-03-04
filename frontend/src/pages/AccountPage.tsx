@@ -2,9 +2,13 @@ import { Navigate } from "react-router-dom";
 import { useUserContext } from "../userContext";
 
 const AccountPage = () => {
-  const { user } = useUserContext();
+  const { user, ready } = useUserContext();
 
-  if (user?._id === "") {
+  if (!ready) {
+    return <div>Loading...</div>;
+  }
+
+  if (ready && !user) {
     return <Navigate to={"/login"} />;
   }
 
