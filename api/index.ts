@@ -26,6 +26,10 @@ app.get("/test", (req: Request, res: Response) => {
   res.json("test ok");
 });
 
+app.get("/profile", (req: Request, res: Response) => {
+  res.json("user info");
+});
+
 app.post("/register", async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
 
@@ -54,7 +58,7 @@ app.post("/login", async (req: Request, res: Response) => {
         (err: string, token: string) => {
           if (err) throw err;
 
-          res.cookie("token", token).json("password Ok");
+          res.cookie("token", token).json(userDoc);
         }
       );
     } else {

@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import tw from "tailwind-styled-components";
+import { useUserContext } from "../userContext";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [redirect, setRedirect] = useState(false);
+  const { setUser } = useUserContext();
 
   const handleLoginSubmit = async (e: any) => {
     e.preventDefault();
@@ -16,12 +19,18 @@ const LoginPage = () => {
       } else if (res.data === "incorrect password") {
         alert("Incorrect Password");
       } else {
+        setUser(res.data);
         alert("Login successful");
+        setRedirect(true);
       }
     } catch (e) {
       alert("Login failed");
     }
   };
+
+  if (redirect) {
+    return <Navigate to={"/"} />;
+  }
 
   return (
     <ContainerSt>
