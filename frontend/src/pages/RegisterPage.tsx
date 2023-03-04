@@ -8,9 +8,18 @@ const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const registerUser = (e: any) => {
+  const registerUser = async (e: any) => {
     e.preventDefault();
-    axios.get("http://localhost:4000/test");
+    try {
+      await axios.post("/register", {
+        name,
+        email,
+        password,
+      });
+      alert("Registration successful. Now you can log in");
+    } catch (e) {
+      alert("Registration failed. Account already exists");
+    }
   };
 
   return (
