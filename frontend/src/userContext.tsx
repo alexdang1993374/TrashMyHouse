@@ -24,7 +24,7 @@ const initialState: IInitialState = {
 
 interface IContextValue {
   user: IUser | null;
-  setUser: (user: IUser) => void;
+  setUser: (user: IUser | null) => void;
   ready: boolean;
   setReady: (value: boolean) => void;
 }
