@@ -1,14 +1,45 @@
+import axios from "axios";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
 
 const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLoginSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("/login", { email, password });
+      if (res.data === "email not found") {
+        alert("Incorrect Email");
+      } else if (res.data === "incorrect password") {
+        alert("Incorrect Password");
+      } else {
+        alert("Login successful");
+      }
+    } catch (e) {
+      alert("Login failed");
+    }
+  };
+
   return (
     <ContainerSt>
       <h1 className="text-4xl text-center mb-4">Login</h1>
       <div className="text-left">
-        <form className="max-w-md mx-auto">
-          <input type="email" placeholder="your@email.com" />
-          <input type="password" placeholder="password" />
+        <form className="max-w-md mx-auto" onSubmit={handleLoginSubmit}>
+          <input
+            type="email"
+            placeholder="your@email.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <button className="primary">Login</button>
           <div className="text-center py-2 text-gray-500">
             Don't have an account yet?{" "}
