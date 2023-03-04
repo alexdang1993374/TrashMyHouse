@@ -6,11 +6,9 @@ interface IUserContextProviderProps {
 }
 
 interface IUser {
-  __v: number;
   _id: string;
   email: string;
   name: string;
-  password: string;
 }
 
 interface IContextValue {
@@ -20,11 +18,9 @@ interface IContextValue {
 
 export const UserContext = createContext<IContextValue>({
   user: {
-    __v: 0,
     _id: "",
     email: "",
     name: "",
-    password: "",
   },
   setUser: () => {},
 });
@@ -35,16 +31,18 @@ export const UserContextProvider = ({
   children,
 }: IUserContextProviderProps) => {
   const [user, setUser] = useState({
-    __v: 0,
     _id: "",
     email: "",
     name: "",
-    password: "",
   });
 
   useEffect(() => {
-    if (user.name === "") {
-      axios.get("/profile");
+    if (user?._id === "") {
+      const fetchProfile = async () => {
+        const { data } = await axios.get("/profile");
+        setUser(data);
+      };
+      fetchProfile();
     }
   }, []);
 

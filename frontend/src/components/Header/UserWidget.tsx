@@ -15,7 +15,7 @@ const UserWidget = () => {
       <div className="bg-gray-500 text-white rounded-full border border-gray-500">
         <UserIcon />
       </div>
-      {user._id !== "" && <div>{user.name}</div>}
+      {user?._id !== "" && <div>{user?.name}</div>}
     </Link>
   );
 };

@@ -12,6 +12,7 @@ const app: Application = express();
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = "asdfawefasdf4eertertedrgesdfgsdfg35w4324wtsrftgh";
 
+// init
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -20,8 +21,13 @@ app.use(
     origin: "http://127.0.0.1:5173",
   })
 );
-
 mongoose.connect(process.env.MONGO_URL as string);
+
+interface IUserProfile {
+  email: string;
+  _id: string;
+  name: string;
+}
 
 //endpoints
 app.get("/test", (req: Request, res: Response) => {
@@ -30,7 +36,20 @@ app.get("/test", (req: Request, res: Response) => {
 
 app.get("/profile", (req: Request, res: Response) => {
   const { token } = req.cookies;
-  res.json({ token });
+  if (token) {
+    jwt.verify(
+      token,
+      jwtSecret,
+      {},
+      async (err: string, userData: IUserProfile) => {
+        if (err) throw err;
+        const { name, email, _id } = await User.findById(userData._id);
+        res.json({ name, email, _id });
+      }
+    );
+  } else {
+    res.json(null);
+  }
 });
 
 app.post("/register", async (req: Request, res: Response) => {
