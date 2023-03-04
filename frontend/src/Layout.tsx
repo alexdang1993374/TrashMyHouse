@@ -3,7 +3,7 @@ import PageHeader from "./components/Header/PageHeader";
 
 const Layout = () => {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <PageHeader />
       <Outlet />
     </div>
